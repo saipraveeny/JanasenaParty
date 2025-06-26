@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 
 const ideals = [
@@ -250,15 +250,116 @@ const getCardPosition = (idx, total, radius) => {
   };
 };
 
+const FlipCardWrapper = styled.div`
+  perspective: 900px;
+  width: 98vw;
+  max-width: 340px;
+  margin: 0.7rem auto;
+`;
+
+const FlipCard = styled.div`
+  width: 100%;
+  height: 110px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 1.2rem;
+  box-shadow: 0 4px 16px 0 rgba(211, 47, 47, 0.08);
+  background: ${({ bg }) => bg || "#fff"};
+  cursor: pointer;
+  transform: ${({ flipped }) => (flipped ? "rotateY(180deg)" : "none")};
+`;
+
+const FlipCardFace = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #d32f2f;
+  border-radius: 1.2rem;
+  padding: 1rem;
+  background: ${({ bg }) => bg || "#fff"};
+`;
+
+const FlipCardBack = styled(FlipCardFace)`
+  background: #fff;
+  color: #333;
+  transform: rotateY(180deg);
+  font-size: 0.5rem;
+  font-weight: 400;
+  padding: 0.6rem 0.5rem;
+  line-height: 1.3;
+  b {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #d32f2f;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+`;
+
+const MobileGrid = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 360px;
+`;
+
 const IdealsInfographics = () => {
   const [activeIdeal, setActiveIdeal] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const [flippedIdx, setFlippedIdx] = useState(null);
 
-  // Responsive radius
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 700);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Responsive radius for desktop
   let radius = 200;
-  if (typeof window !== "undefined") {
+  if (!isMobile && typeof window !== "undefined") {
     if (window.innerWidth < 700) radius = 110;
     if (window.innerWidth < 480) radius = 55;
   }
+
+  if (isMobile) {
+    return (
+      <Wrapper>
+        <MobileGrid>
+          {ideals.map((ideal, idx) => (
+            <FlipCardWrapper key={idx}>
+              <FlipCard
+                bg={ideal.bg}
+                flipped={flippedIdx === idx}
+                onClick={() => setFlippedIdx(flippedIdx === idx ? null : idx)}
+              >
+                <FlipCardFace bg={ideal.bg}>{ideal.text}</FlipCardFace>
+                <FlipCardBack>
+                  <b>{ideal.text}</b>
+                  <br />
+                  {ideal.description}
+                </FlipCardBack>
+              </FlipCard>
+            </FlipCardWrapper>
+          ))}
+        </MobileGrid>
+      </Wrapper>
+    );
+  }
+
+  // Desktop (existing behavior)
   return (
     <Wrapper onMouseLeave={() => setActiveIdeal(null)}>
       <Circle>

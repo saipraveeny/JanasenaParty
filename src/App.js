@@ -10,6 +10,9 @@ import IdealsInfographics from "./components/IdealsInfographics";
 import Footer from "./components/Footer";
 import JoinCards from "./components/JoinCards";
 import Membership from "./components/Membership";
+import Donations from "./components/Donations";
+import SAVVE from "./components/SAVVE";
+import Volunteers from "./components/Volunteers";
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -65,6 +68,9 @@ function App() {
             }
           />
           <Route path="/membership" element={<Membership />} />
+          <Route path="/donate" element={<Donations />} />
+          <Route path="/savve" element={<SAVVE />} />
+          <Route path="/volunteer" element={<Volunteers />} />
         </Routes>
       </MainWrapper>
     </Router>

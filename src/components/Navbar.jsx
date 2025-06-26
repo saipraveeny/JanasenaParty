@@ -233,7 +233,9 @@ const Navbar = () => {
     <NavbarBar>
       <Left>
         <LogoWrap>
-          <LogoSvg />
+          <Link to="/">
+            <LogoSvg />
+          </Link>
         </LogoWrap>
       </Left>
       <Right>
@@ -259,8 +261,8 @@ const Navbar = () => {
         </Menu>
         <ActionButtonsWrapper>
           <ActionLink to="/membership">Get Membership</ActionLink>
-          <ActionLink to="#">NRI Connect</ActionLink>
-          <ActionLink to="#">Donate</ActionLink>
+          <ActionLink to="/savve">NRI Connect</ActionLink>
+          <ActionLink to="/donate">Donate</ActionLink>
         </ActionButtonsWrapper>
         <HamburgerButton onClick={toggleMenu} aria-label="Menu">
           {isMenuOpen ? <FaTimes /> : <FaBars />}
@@ -294,8 +296,8 @@ const Navbar = () => {
           <SectionTitle>Quick Actions</SectionTitle>
           <ActionButtons>
             <ActionLink to="/membership">Get Membership</ActionLink>
-            <ActionLink to="#">NRI Connect</ActionLink>
-            <ActionLink to="#">Donate</ActionLink>
+            <ActionLink to="/savve">NRI Connect</ActionLink>
+            <ActionLink to="/donate">Donate</ActionLink>
             <ActionLink to="#">President's Office</ActionLink>
           </ActionButtons>
         </MenuSection>

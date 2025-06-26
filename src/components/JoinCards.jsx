@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { FaUsers, FaHandHoldingUsd, FaArrowRight } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const Section = styled.section`
   width: 100%;
@@ -99,6 +100,7 @@ const CTA = styled.a`
 
 const JoinButton = styled.a`
   display: inline-block;
+  border: none;
   background: #fff;
   color: #d32f2f;
   font-weight: 700;
@@ -114,46 +116,51 @@ const JoinButton = styled.a`
   }
 `;
 
-const JoinCards = () => (
-  <Section>
-    <Card>
-      <IconWrap>
-        <FaUsers />
-      </IconWrap>
-      <Title>Volunteer for JanaSena</Title>
-      <Description>
-        Together lets bring a positive change in the society. Volunteer with us
-        and make a difference
-      </Description>
-      <CTA href="#">
-        CLICK HERE <FaArrowRight />
-      </CTA>
-    </Card>
-    <Divider />
-    <Card>
-      <CenterTitle>Let's Strengthen JanaSena Party</CenterTitle>
-      <Description>
-        Please enroll as a Member of JanaSena Party by giving a missed call to
-      </Description>
-      <Phone>+91 9394022222</Phone>
-      <div>or</div>
-      <JoinButton href="#">JOIN ONLINE</JoinButton>
-    </Card>
-    <Divider />
-    <Card>
-      <IconWrap>
-        <FaHandHoldingUsd />
-      </IconWrap>
-      <Title>Donations</Title>
-      <Description>
-        JanaSena Party's continuous fight for Social Balance and everyone's
-        development needs your support.
-      </Description>
-      <CTA href="#">
-        DONATE NOW <FaArrowRight />
-      </CTA>
-    </Card>
-  </Section>
-);
+const JoinCards = () => {
+  const navigate = useNavigate();
+  return (
+    <Section>
+      <Card>
+        <IconWrap>
+          <FaUsers />
+        </IconWrap>
+        <Title>Volunteer for JanaSena</Title>
+        <Description>
+          Together lets bring a positive change in the society. Volunteer with
+          us and make a difference
+        </Description>
+        <CTA as="button" onClick={() => navigate("/volunteer")}>
+          CLICK HERE <FaArrowRight />
+        </CTA>
+      </Card>
+      <Divider />
+      <Card>
+        <CenterTitle>Let's Strengthen JanaSena Party</CenterTitle>
+        <Description>
+          Please enroll as a Member of JanaSena Party by giving a missed call to
+        </Description>
+        <Phone>+91 9394022222</Phone>
+        <div>or</div>
+        <JoinButton as="button" onClick={() => navigate("/membership")}>
+          JOIN ONLINE
+        </JoinButton>
+      </Card>
+      <Divider />
+      <Card>
+        <IconWrap>
+          <FaHandHoldingUsd />
+        </IconWrap>
+        <Title>Donations</Title>
+        <Description>
+          JanaSena Party's continuous fight for Social Balance and everyone's
+          development needs your support.
+        </Description>
+        <CTA as="button" onClick={() => navigate("/donate")}>
+          DONATE NOW <FaArrowRight />
+        </CTA>
+      </Card>
+    </Section>
+  );
+};
 
 export default JoinCards;

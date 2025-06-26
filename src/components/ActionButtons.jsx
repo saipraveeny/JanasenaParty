@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const ActionsWrapper = styled.section`
   width: 100%;
@@ -10,7 +11,7 @@ const ActionsWrapper = styled.section`
   margin: 2.5rem 0 2rem 0;
 `;
 
-const ActionButton = styled.a`
+const ActionButton = styled(Link)`
   display: flex;
   align-items: center;
   gap: 0.9rem;
@@ -48,16 +49,16 @@ const Icon = styled.span`
 
 const ActionButtons = () => (
   <ActionsWrapper>
-    <ActionButton href="#">
+    <ActionButton to="/membership">
       <Icon>📝</Icon>Get Membership
     </ActionButton>
-    <ActionButton href="#">
+    <ActionButton to="/volunteer">
       <Icon>🤝</Icon>Become a Volunteer
     </ActionButton>
-    <ActionButton href="#">
+    <ActionButton to="#">
       <Icon>📧</Icon>Get Email Updates
     </ActionButton>
-    <ActionButton href="#">
+    <ActionButton to="/donate">
       <Icon>💖</Icon>Make a Donation
     </ActionButton>
   </ActionsWrapper>
