@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import Navbar from "./components/Navbar";
 import HeroCarousel from "./components/HeroCarousel";
 import MissionSection from "./components/MissionSection";
@@ -44,9 +49,27 @@ const MainWrapper = styled.div`
   margin-top: 4rem; /* Account for fixed Navbar only */
 `;
 
+function TitleManager() {
+  const location = useLocation();
+  useEffect(() => {
+    let title = "Welcome to Janasena Party";
+    if (location.pathname === "/membership")
+      title = "Membership | Janasena Party";
+    else if (location.pathname === "/donate")
+      title = "Donations | Janasena Party";
+    else if (location.pathname === "/savve")
+      title = "NRI Connect | Janasena Party";
+    else if (location.pathname === "/volunteer")
+      title = "Volunteer | Janasena Party";
+    document.title = title;
+  }, [location.pathname]);
+  return null;
+}
+
 function App() {
   return (
     <Router>
+      <TitleManager />
       <MainWrapper>
         <GlobalStyle />
         <Navbar />

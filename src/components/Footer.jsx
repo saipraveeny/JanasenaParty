@@ -118,12 +118,13 @@ const NotifyButton = styled.button`
   }
 `;
 
-const AppBadgeCard = styled(Card)`
+const AppBadgeRow = styled.div`
+  display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 1.5rem;
-  padding: 1.2rem 2rem;
+  margin: 0.5rem 0 0.5rem 0;
 `;
 
 const AppBadge = styled.a`
@@ -237,16 +238,26 @@ const Footer = () => (
           </span>
         </NotifyButton>
       </Card>
-      <AppBadgeCard>
-        <AppBadge href="#" aria-label="Download on Google Play">
+      <AppBadgeRow>
+        <AppBadge
+          href="https://play.google.com/store/search?q=janasena&c=apps"
+          aria-label="Download on Google Play"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <SiGoogleplay size={20} />
           Google Play
         </AppBadge>
-        <AppBadge href="#" aria-label="Download on App Store">
+        <AppBadge
+          href="https://apps.apple.com/in/app/janasena-asthra/id1606892395"
+          aria-label="Download on App Store"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <SiAppstore size={20} />
           App Store
         </AppBadge>
-      </AppBadgeCard>
+      </AppBadgeRow>
     </CardsRow>
     <InfoRow>
       <InfoCol>
