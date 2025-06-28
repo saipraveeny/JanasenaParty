@@ -240,7 +240,7 @@ const Footer = () => (
       </Card>
       <AppBadgeRow>
         <AppBadge
-          href="https://play.google.com/store/search?q=janasena&c=apps"
+          href="https://play.google.com/store/apps/details?id=org.janasenaparty.troop"
           aria-label="Download on Google Play"
           target="_blank"
           rel="noopener noreferrer"

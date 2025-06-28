@@ -1,48 +1,55 @@
 import React, { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
+import ideal1 from "../assets/images/idealogies/Mindset that unites different castes..png";
+import ideal2 from "../assets/images/idealogies/Politics without religious discrimination..jpg";
+import ideal3 from "../assets/images/idealogies/Tradition that reveres linguistic diversity.jpg";
+import ideal4 from "../assets/images/idealogies/Society that protects our traditions and culture..png";
+import ideal5 from "../assets/images/idealogies/Nationalism that does not neglect regional aspirations.jpeg";
+import ideal6 from "../assets/images/idealogies/Relentless fight against corruption.jpeg";
+import ideal7 from "../assets/images/idealogies/Development that preserves the environment.jpg";
 
 const ideals = [
   {
     text: "Mindset that unites different castes.",
     description:
       "A progressive vision that transcends caste boundaries, fostering unity through shared values of justice, opportunity, and dignity for all. It emphasizes equal representation, social harmony, and mutual respect across communities, challenging deep-rooted discrimination.",
-    bg: "linear-gradient(120deg, #fff8, #d32f2f22)",
+    image: ideal1,
   },
   {
     text: "Politics without religious discrimination.",
     description:
       "An inclusive political approach that treats all faiths with equal respect, ensuring that governance is secular, fair, and focused on human values rather than religious divides. It promotes peace and coexistence, rejecting the misuse of religion for political gain.",
-    bg: "linear-gradient(120deg, #fff8, #21212122)",
+    image: ideal2,
   },
   {
     text: "Tradition that reveres linguistic diversity.",
     description:
       "A cultural ethos that celebrates India's multilingual richness, recognizing each language as a vessel of heritage and identity. It supports the preservation and promotion of all languages, fostering pride without promoting superiority or division.",
-    bg: "linear-gradient(120deg, #fff8, #d32f2f22)",
+    image: ideal3,
   },
   {
     text: "Society that protects our traditions and culture.",
     description:
       "A society rooted in its timeless values and practices, yet open to progress. It safeguards the arts, rituals, folk customs, and heritage that define our identity, while promoting critical thinking and evolution in cultural expression.",
-    bg: "linear-gradient(120deg, #fff8, #21212122)",
+    image: ideal4,
   },
   {
     text: "Nationalism that does not neglect regional aspirations.",
     description:
       "A balanced patriotism that embraces India's unity while respecting the uniqueness of each state. It ensures regional voices are heard, aspirations addressed, and local cultures represented within the national framework—strengthening federalism.",
-    bg: "linear-gradient(120deg, #fff8, #d32f2f22)",
+    image: ideal5,
   },
   {
     text: "Relentless fight against corruption.",
     description:
       "An uncompromising stance against injustice and misuse of power at all levels. It demands transparency, accountability, and integrity in governance, law enforcement, and public life—empowering citizens to hold the system accountable.",
-    bg: "linear-gradient(120deg, #fff8, #21212122)",
+    image: ideal6,
   },
   {
     text: "Development that preserves the environment.",
     description:
       "A model of growth that respects nature, aiming for sustainable progress. It promotes green technologies, responsible urban planning, and ecological conservation, ensuring that future generations inherit a thriving, livable planet.",
-    bg: "linear-gradient(120deg, #fff8, #388e3c22)",
+    image: ideal7,
   },
 ];
 
@@ -96,20 +103,21 @@ const Card = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 140px;
-  height: 140px;
+  width: 160px;
+  height: 160px;
+  background-image: url(${({ image }) => image});
   background-size: cover;
   background-position: center;
-  border-radius: 10rem;
+  border-radius: 5rem;
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.13);
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  color: #fff;
-  font-size: 0.8rem;
-  font-weight: 500;
-  padding: 1rem;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 1.2rem;
   transform: translate(-50%, -50%) scale(1);
   animation: ${fadeIn} 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   transition: transform 0.18s, box-shadow 0.18s;
@@ -123,25 +131,31 @@ const Card = styled.div`
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(33, 33, 33, 0.45);
+    background: rgba(255, 255, 255, 0.12);
     z-index: 1;
-    border-radius: 1.2rem;
+    border-radius: 5rem;
+    box-shadow: 0 2px 16px 0 rgba(211, 47, 47, 0.08);
   }
   > span {
     position: relative;
     z-index: 2;
+    color: #ffffff;
+    font-weight: 800;
+    text-shadow: 0 2px 8px #fff8, 0 1px 2px #0008;
   }
   @media (max-width: 700px) {
-    width: 80px;
-    height: 80px;
+    width: 90px;
+    height: 90px;
     font-size: 0.7rem;
     padding: 0.4rem;
+    border-radius: 1.2rem;
   }
   @media (max-width: 480px) {
     width: 48px;
     height: 48px;
     font-size: 0.55rem;
     padding: 0.2rem;
+    border-radius: 0.7rem;
   }
 `;
 
@@ -265,9 +279,16 @@ const FlipCard = styled.div`
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: 1.2rem;
   box-shadow: 0 4px 16px 0 rgba(211, 47, 47, 0.08);
-  background: ${({ bg }) => bg || "#fff"};
+  background: #fff;
   cursor: pointer;
   transform: ${({ flipped }) => (flipped ? "rotateY(180deg)" : "none")};
+  & > div {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
 `;
 
 const FlipCardFace = styled.div`
@@ -276,32 +297,36 @@ const FlipCardFace = styled.div`
   height: 100%;
   backface-visibility: hidden;
   display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: rgb(255, 255, 255);
+  border-radius: 1.2rem;
+  padding: 0;
+  background: none;
+  overflow: hidden;
+`;
+
+const FlipCardBack = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: #d32f2f;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #232323;
   border-radius: 1.2rem;
-  padding: 1rem;
-  background: ${({ bg }) => bg || "#fff"};
-`;
-
-const FlipCardBack = styled(FlipCardFace)`
+  padding: 0.7rem 0.5rem;
   background: #fff;
-  color: #333;
+  box-shadow: 0 2px 8px 0 rgba(211, 47, 47, 0.08);
   transform: rotateY(180deg);
-  font-size: 0.5rem;
-  font-weight: 400;
-  padding: 0.6rem 0.5rem;
-  line-height: 1.3;
-  b {
-    font-size: 0.7rem;
-    font-weight: 600;
-    color: #d32f2f;
-    display: block;
-    margin-bottom: 0.3rem;
-  }
+  z-index: 3;
 `;
 
 const MobileGrid = styled.div`
@@ -311,6 +336,36 @@ const MobileGrid = styled.div`
   width: 100%;
   margin: 0 auto;
   max-width: 360px;
+`;
+
+const CardOverlay = styled.div`
+  position: absolute;
+  inset: 0;
+  background: rgba(50, 48, 48, 0.85);
+  z-index: 1;
+  border-radius: 5rem;
+`;
+
+const CardImage = styled.img`
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5rem;
+  z-index: 0;
+`;
+
+const MobileTextOverlay = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 0.5rem 0.7rem;
+  border-radius: 0 0 1.2rem 1.2rem;
+  z-index: 2;
+  text-align: center;
 `;
 
 const IdealsInfographics = () => {
@@ -341,13 +396,34 @@ const IdealsInfographics = () => {
           {ideals.map((ideal, idx) => (
             <FlipCardWrapper key={idx}>
               <FlipCard
-                bg={ideal.bg}
                 flipped={flippedIdx === idx}
                 onClick={() => setFlippedIdx(flippedIdx === idx ? null : idx)}
               >
-                <FlipCardFace bg={ideal.bg}>{ideal.text}</FlipCardFace>
+                <FlipCardFace style={{ position: "absolute" }}>
+                  <CardImage
+                    src={ideal.image}
+                    alt={ideal.text}
+                    style={{ borderRadius: "1.2rem" }}
+                  />
+                  <CardOverlay style={{ borderRadius: "1.2rem" }} />
+                  <MobileTextOverlay>
+                    <span
+                      style={{
+                        position: "relative",
+                        zIndex: 2,
+                        color: "#d32f2f",
+                        fontWeight: 800,
+                        textShadow: "0 2px 8px #fff8, 0 1px 2px #0008",
+                      }}
+                    >
+                      {ideal.text}
+                    </span>
+                  </MobileTextOverlay>
+                </FlipCardFace>
                 <FlipCardBack>
-                  <b>{ideal.text}</b>
+                  <b style={{ color: "#d32f2f", fontWeight: 700 }}>
+                    {ideal.text}
+                  </b>
                   <br />
                   {ideal.description}
                 </FlipCardBack>
@@ -366,11 +442,14 @@ const IdealsInfographics = () => {
         {ideals.map((ideal, idx) => (
           <Card
             key={idx}
-            bg={ideal.bg}
             style={getCardPosition(idx, ideals.length, radius)}
             onMouseEnter={() => setActiveIdeal(ideal)}
           >
-            <span>{ideal.text}</span>
+            <CardImage src={ideal.image} alt={ideal.text} />
+            <CardOverlay />
+            <span style={{ position: "relative", zIndex: 2 }}>
+              {ideal.text}
+            </span>
           </Card>
         ))}
         <CenterTitle>

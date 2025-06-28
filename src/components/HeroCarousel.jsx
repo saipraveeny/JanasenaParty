@@ -12,12 +12,26 @@ import "swiper/css/effect-fade";
 
 // Import images
 import janavaniImage from "../assets/images/janavani.jpg";
+import janavaniImageMobile from "../assets/images/janavani_mobile.jpg";
 import homePageImage from "../assets/images/homepage.jpg";
+import homePageImageMobile from "../assets/images/homepage_mobile.jpg";
 import ideologiesImage from "../assets/images/telugu7idealogies.jpg";
+import ideologiesImageMobile from "../assets/images/telugu7idealogies_mobile.jpg";
+
+function useIsMobile() {
+  const [isMobile, setIsMobile] = React.useState(window.innerWidth <= 768);
+  React.useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+  return isMobile;
+}
 
 const slides = [
   {
     image: janavaniImage,
+    imageMobile: janavaniImageMobile,
     title: "JanaVani - Voice of the People",
     subtitle: "Empowering democracy through transparency and accountability",
     description:
@@ -25,12 +39,14 @@ const slides = [
   },
   {
     image: homePageImage,
+    imageMobile: homePageImageMobile,
     title: "JanaSena Party",
     subtitle: "For Common Man's Victory and Democratic Values",
     description: "Working towards the welfare of every citizen",
   },
   {
     image: ideologiesImage,
+    imageMobile: ideologiesImageMobile,
     title: "Seven Ideologies",
     subtitle: "Building a stronger, more inclusive society",
     description: "United by principles, driven by progress",
@@ -266,6 +282,7 @@ const GlassNavButton = styled.button`
 const HeroCarousel = () => {
   const prevRef = React.useRef(null);
   const nextRef = React.useRef(null);
+  const isMobile = useIsMobile();
   return (
     <CarouselContainer>
       <Swiper
@@ -285,7 +302,7 @@ const HeroCarousel = () => {
       >
         {slides.map((slide, idx) => (
           <SwiperSlide key={idx}>
-            <SlideImage image={slide.image}>
+            <SlideImage image={isMobile ? slide.imageMobile : slide.image}>
               <SlideContentWrapper>
                 <SlideContent>
                   <ReadMoreButton>Read More</ReadMoreButton>
